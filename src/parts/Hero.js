@@ -26,17 +26,17 @@ export default function Hero() {
             <button
               className="video hero-cta focus:outline-none z-30 modal-trigger"
               data-content='<div className="w-screen pb-56 md:w-88 md:pb-56 relative z-50">
-              <div className="absolute w-full h-full">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/3h0_v1cdUIA"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </div>'
+            <div className="absolute w-full h-full">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/3h0_v1cdUIA"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>'
             ></button>
           </div>
           <img src="images/content/image-section-1.png" alt="hero 1" className="absolute inset-0 md:relative w-full h-full object-cover object-center" />
