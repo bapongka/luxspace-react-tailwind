@@ -11,13 +11,13 @@ import Footer from "../parts/Footer";
 export default function HomePage(props) {
   return (
     <>
-      <Header></Header>
-      <Hero></Hero>
-      <BrowseRoom></BrowseRoom>
-      <JustArrived></JustArrived>
-      <Clients></Clients>
-      <Sitemap></Sitemap>
-      <Footer></Footer>
+      <Header />
+      <Hero />
+      <BrowseRoom />
+      <JustArrived />
+      <Clients />
+      <Sitemap />
+      <Footer />
     </>
   );
 }
