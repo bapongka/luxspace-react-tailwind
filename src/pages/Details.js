@@ -9,10 +9,10 @@ import Clients from "../parts/Clients";
 import Sitemap from "../parts/Sitemap";
 import Footer from "../parts/Footer";
 
-export default function HomePage(props) {
+export default function HomePage() {
   return (
     <>
-      <Header />
+      <Header theme="black" />
       <Breadcrumb
         list={[
           { url: "/", name: "Home" },

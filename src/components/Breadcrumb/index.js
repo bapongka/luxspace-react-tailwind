@@ -11,7 +11,9 @@ export default function Breadcrumb({ List }) {
             const arias = index === List?.length ? { "aria-label": "current-page" } : {};
             return (
               <li key={item.url}>
-                <Link to={item.url}>{item.name}</Link>
+                <Link to={item.url} {...arias}>
+                  {item.name}
+                </Link>
               </li>
             );
           })}
