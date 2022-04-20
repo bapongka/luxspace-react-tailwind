@@ -39,7 +39,7 @@ export default function Hero() {
           </div>'
             ></button>
           </div>
-          <img src="images/content/image-section-1.png" alt="hero 1" className="absolute inset-0 md:relative w-full h-full object-cover object-center" />
+          <img src="./images/content/image-section-1.png" alt="hero 1" className="absolute inset-0 md:relative w-full h-full object-cover object-center" />
         </div>
       </div>
     </section>
