@@ -17,7 +17,7 @@ export default function Breadcrumb({ List }) {
               </li>
             );
           })}
-          <li>
+          {/* <li>
             <a href="index.html">Home</a>
           </li>
           <li>
@@ -27,7 +27,7 @@ export default function Breadcrumb({ List }) {
             <a href="#" aria-label="current-page">
               Details
             </a>
-          </li>
+          </li> */}
         </ul>
       </div>
     </section>
