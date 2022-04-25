@@ -17,9 +17,12 @@ export default function HomePage() {
       <Header theme="black" />
       <Breadcrumb
         list={[
+          // { url: "/", name: "Home" },
+          // { url: "/categories/696969", name: "Office Room" },
+          // { url: "/categories/696969/products/696969", name: "Details" },
           { url: "/", name: "Home" },
-          { url: "/categories/696969", name: "Office Room" },
-          { url: "/categories/696969/products/696969", name: "Details" },
+          { url: "/categories/91231", name: "Office Room" },
+          { url: "/categories/91231/products/7888", name: "Details" },
         ]}
       />
       {/* <Hero/>     

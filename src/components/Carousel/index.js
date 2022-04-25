@@ -4,7 +4,8 @@ import { addClass, removeClass } from "../../helpers/format/classNameModifier";
 export default function Carousel({ children, refContainer }) {
   const refDragHandler = useRef(null);
   const containerClientRect = refContainer.current.getBoundingClientRect();
-  const [index, setindex] = useState(0);
+  const [index, setIndex] = useState(0);
+
   const threshold = 100;
   const itemToShow = window.innerWidth < 767 ? 1 : 4;
   const DIRECTION_LEFT = "DIRECTION_LEFT";
@@ -16,8 +17,8 @@ export default function Carousel({ children, refContainer }) {
   const posFinal = useRef();
   const isAllowShift = useRef(true);
   const cards = useRef();
-  const cardSize = cards.current?.[0].offsetWidth || 0;
   const cardCount = cards.current?.length || 0;
+  const cardSize = cards.current?.[0].offsetWidth || 0;
 
   const fnCheckIndex = useCallback(
     (e) => {
@@ -25,17 +26,19 @@ export default function Carousel({ children, refContainer }) {
         setTimeout(() => {
           removeClass(refDragHandler.current, "transition-all duration-200");
         }, 200);
+
         const isMobile = window.innerWidth < 767 ? 0 : -1;
         if (index <= 0) {
           refDragHandler.current.style.left = 0;
-          setindex(0);
+          setIndex(0);
         } else if (index >= cardCount - itemToShow) {
           refDragHandler.current.style.left = `${-((cardCount - itemToShow + isMobile) * cardSize)}px`;
-          setindex(cardCount - itemToShow);
+          setIndex(cardCount - itemToShow);
         } else if (index === cardCount || index === cardCount - 1) {
           refDragHandler.current.style.left = `${(cardCount - 1) * cardSize}px`;
-          setindex(cardCount - 1);
+          setIndex(cardCount - 1);
         }
+
         isAllowShift.current = true;
       }
     },
@@ -48,13 +51,14 @@ export default function Carousel({ children, refContainer }) {
 
       if (isAllowShift.current) {
         if (direction === "DIRECTION_LEFT") {
-          setindex((prev) => prev + 1);
+          setIndex((prev) => prev + 1);
           refDragHandler.current.style.left = `${posInitial.current - cardSize}px`;
         } else if (direction === "DIRECTION_RIGHT") {
-          setindex((prev) => prev - 1);
+          setIndex((prev) => prev - 1);
           refDragHandler.current.style.left = `${posInitial.current + cardSize}px`;
         }
       }
+
       isAllowShift.current = false;
     },
     [cardSize]
@@ -64,7 +68,6 @@ export default function Carousel({ children, refContainer }) {
     (e) => {
       e = e || window.event;
       e.preventDefault();
-      console.log(e);
 
       if (e.type === "touchmove") {
         posX2.current = posX1.current - e.touches[0].clientX;
@@ -73,6 +76,7 @@ export default function Carousel({ children, refContainer }) {
         posX2.current = posX1.current - e.clientX;
         posX1.current = e.clientX;
       }
+
       refDragHandler.current.style.left = `${refDragHandler.current.offsetLeft - posX2.current}px`;
     },
     [posX1, posX2]
@@ -82,7 +86,6 @@ export default function Carousel({ children, refContainer }) {
     (e) => {
       e = e || window.event;
       e.preventDefault();
-      // console.log(e);
 
       posFinal.current = refDragHandler.current.offsetLeft;
 
@@ -93,6 +96,7 @@ export default function Carousel({ children, refContainer }) {
       } else {
         refDragHandler.current.style.left = `${posInitial.current}px`;
       }
+
       document.onmouseup = null;
       document.onmousemove = null;
     },
@@ -103,7 +107,6 @@ export default function Carousel({ children, refContainer }) {
     (e) => {
       e = e || window.event;
       e.preventDefault();
-      // console.log(e);
 
       posInitial.current = refDragHandler.current.offsetLeft;
 
@@ -122,6 +125,7 @@ export default function Carousel({ children, refContainer }) {
     e = e || window.event;
     !isAllowShift.current && e.preventDefault();
   }, []);
+
   useLayoutEffect(() => {
     const refForwardDragHandler = refDragHandler.current;
 
@@ -131,13 +135,12 @@ export default function Carousel({ children, refContainer }) {
     refForwardDragHandler.addEventListener("touchmove", onDragMove);
     refForwardDragHandler.addEventListener("click", onClick);
     refForwardDragHandler.addEventListener("transitionend", fnCheckIndex);
-
     return () => {
       refForwardDragHandler.removeEventListener("touchstart", onDragStart);
       refForwardDragHandler.removeEventListener("touchend", onDragEnd);
       refForwardDragHandler.removeEventListener("touchmove", onDragMove);
-      refForwardDragHandler.addEventListener("click", onClick);
-      refForwardDragHandler.addEventListener("transitionend", fnCheckIndex);
+      refForwardDragHandler.removeEventListener("click", onClick);
+      refForwardDragHandler.removeEventListener("transitionend", fnCheckIndex);
     };
   }, [onDragStart, onDragEnd, onDragMove, onClick, fnCheckIndex]);
 
@@ -148,7 +151,7 @@ export default function Carousel({ children, refContainer }) {
   }, []);
 
   return (
-    <div ref={refDragHandler} className="flex -mx-4 flex-row relative" style={{ paddingLeft: containerClientRect - 16 }}>
+    <div ref={refDragHandler} className="flex -mx-4 flex-row relative" style={{ paddingLeft: containerClientRect.left - 16 }}>
       {children}
     </div>
   );
