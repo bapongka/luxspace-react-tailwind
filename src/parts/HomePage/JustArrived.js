@@ -21,13 +21,13 @@ function Loading() {
 }
 
 export default function JustArrived() {
-  const { data, status, error, run, isLoading } = useAsync();
+  const { data, error, run, isLoading } = useAsync();
+
   const refContainer = useRef(null);
 
   useEffect(() => {
     run(fetch({ url: "/api/products/?page=1&limit=10" }));
   }, [run]);
-  console.log(data, status, error);
 
   return (
     <section className="flex flex-col py-16">
@@ -42,9 +42,14 @@ export default function JustArrived() {
       <div className="overflow-x-hidden px-4" id="carousel">
         <div className="container mx-auto" ref={refContainer}></div>
         {/* <!-- <div className="overflow-hidden z-10"> --> */}
-        {/* <div className="flex -mx-4 flex-row relative"> */}
+
         {isLoading ? (
-          <div className="flex -mx-4 flex-row relative" style={{ paddingLeft: refContainer.current?.getBoundingClientRect?.()?.left - 16 || 0 }}>
+          <div
+            className="flex -mx-4 flex-row relative"
+            style={{
+              paddingLeft: refContainer.current?.getBoundingClientRect?.()?.left - 16 || 0,
+            }}
+          >
             <Loading />
           </div>
         ) : error ? (
@@ -77,7 +82,6 @@ export default function JustArrived() {
             })}
           </Carousel>
         )}
-        {/* </div> */}
       </div>
     </section>
   );
