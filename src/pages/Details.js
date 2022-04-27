@@ -122,6 +122,8 @@ export default function HomePage() {
       <JustArrived/> */}
       {isLoading ? <LoadingProductsDetails /> : <ProductDetails data={data} />}
       {isLoading ? <LoadingSuggestion /> : <Suggestion data={data?.relatedProducts || {}} />}
+      {/* {isLoading ? "Loading" : <ProductDetails data={data} />}
+      {isLoading ? "Loading" : <Suggestion data={data?.relatedProducts || {}} />} */}
       {/* <Clients /> */}
       <Sitemap />
       <Footer />
